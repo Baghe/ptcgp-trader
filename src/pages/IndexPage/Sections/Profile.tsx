@@ -52,11 +52,9 @@ export const Profile: FC = () => {
           setFormData({ ...FormData, friendCode: value })
         }} />
       <div style={{ padding: 16 }}>
-        <Button size="m" stretched onClick={Save} disabled={FormData.friendCode.length !== 16 || Saving}>
+        <Button size="m" stretched onClick={Save} disabled={FormData.friendCode?.length !== 16 || Saving}>
           {Saving ? <Spinner size="s" /> : 'Save'}
         </Button>
-
-        <pre style={{ overflow: "auto" }}>{JSON.stringify(Response, null, 2)}</pre>
       </div>
     </Section>
   ) : (
