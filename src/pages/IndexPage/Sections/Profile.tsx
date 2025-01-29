@@ -53,7 +53,7 @@ export const Profile: FC = () => {
         }} />
       <div style={{ padding: 16 }}>
         <Button size="m" stretched onClick={Save} disabled={FormData.friendCode?.length !== 16 || Saving}>
-          {Saving ? <Spinner size="s" /> : 'Save'}
+          {Saving ? <><Spinner size="s" /> Saving...</> : 'Save'}
         </Button>
       </div>
     </Section>
