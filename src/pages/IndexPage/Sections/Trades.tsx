@@ -3,7 +3,7 @@ import { type FC } from 'react';
 
 
 export const Trades: FC = () => {
-  
+
   return (
     <Section header="Trades">
       aaa

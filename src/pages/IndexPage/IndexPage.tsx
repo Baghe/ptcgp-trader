@@ -37,15 +37,12 @@ export const IndexPage: FC = () => {
 
   return (
     <Page back={false}>
-
       {currentTab === 'profile' && (
         <Profile />
       )}
-
       {currentTab === 'trades' && (
         <Trades />
       )}
-
       {currentTab === 'debug' && (
         <Section header="Application Launch Data">
           <Link to="/init-data">
@@ -60,7 +57,7 @@ export const IndexPage: FC = () => {
         </Section>
       )}
 
-
+      <div style={{ padding: 50 }} />
       <Tabbar>
         {Tabs.map(({ id, text, Icon }) => (
           <Tabbar.Item key={id} text={text} selected={id === currentTab} onClick={() => setCurrentTab(id)}>
