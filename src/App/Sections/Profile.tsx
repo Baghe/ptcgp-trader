@@ -2,6 +2,10 @@ import { useEffect, useState, type FC } from 'react';
 import { retrieveLaunchParams } from '@telegram-apps/sdk-react';
 import { ApiCall } from '../Functions';
 
+declare global {
+  interface Window { MiniApp: any; }
+}
+
 export const Profile: FC = () => {
   const { initData } = retrieveLaunchParams();
 
@@ -15,6 +19,9 @@ export const Profile: FC = () => {
   function Load() {
     ApiCall("profile-get", {}, (data) => {
       if (data.Result) {
+        window.MiniApp = window.MiniApp || {};
+        window.MiniApp = data.Data;
+        
         setFormData({
           nickname: data.Data.nickname || '',
           friendCode: data.Data.friendCode || '',
@@ -34,6 +41,7 @@ export const Profile: FC = () => {
     setSaving(true);
     ApiCall("profile-set", FormData, () => {
       setSaving(false);
+      Load();
     });
   }
 
@@ -55,7 +63,7 @@ export const Profile: FC = () => {
           <div className="mb-2">
             <div className="text-muted small ps-2">Friend Code{FormData.friendCode?.length === 16 ? '' : ' (required)'}</div>
             <input type="text" className={"form-control form-control-lg" + (FormData.friendCode?.length === 16 ? '' : ' is-invalid')}
-              placeholder="Ash"
+              placeholder="0000-0000-0000-0000"
               maxLength={19} disabled={Saving}
               value={FormData.friendCode.replace(/(\d{4})/g, '$1-').replace(/-$/, '')} onChange={(e) => {
                 const value = e.target.value.replace(/\D/g, '');

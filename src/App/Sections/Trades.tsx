@@ -18,6 +18,8 @@ export const Trades: FC = () => {
   const [IdTrade, setIdTrade] = useState<any>(null);
   const [TradeSelected, setTradeSelected] = useState<any>(null);
 
+  console.log(window.MiniApp)
+
   useEffect(() => {
     Load()
   }, []);
@@ -339,22 +341,36 @@ export const Trades: FC = () => {
                     </div>
 
                     {Trade.MyBid ? (
-                      Trade.MyBid.BidStatus === "sent" && (
-                        <button className="btn btn-danger w-100" onClick={() => BidCancel(IdTrade)}>
-                          Withdraw trade offer
-                        </button>
-                      )
+                      <>
+                        {Trade.MyBid.BidStatus === "sent" && (
+                          <button className="btn btn-danger w-100" onClick={() => BidCancel(IdTrade)}>
+                            Withdraw trade offer
+                          </button>
+                        )}
+                        {Trade.MyBid.BidStatus === "rejected" && (
+                          <div className="text-danger text-center">
+                            Trade offer rejected
+                          </div>
+                        )}
+                      </>
                     ) : (
-                      <button className="btn btn-lg btn-primary w-100" disabled={!TradeSelected} onClick={() => BidSend(IdTrade, TradeSelected)}>
-                        Send trade offer
-                      </button>
+                      window.MiniApp.friendCode ? (
+                        <>
+                          <button className="btn btn-lg btn-primary w-100" disabled={!TradeSelected} onClick={() => BidSend(IdTrade, TradeSelected)}>
+                            Send trade offer
+                          </button>
+                          <div className="text-muted small mt-2 lh-1">
+                            The player will receive a notification to accept or decline the trade offer.
+                            If the player accepts the trade offer, you will see each other's friend code and you can trade in the game.
+                            If the player set a public Telegram username, you can also chat with the player.
+                          </div>
+                        </>
+                      ) : (
+                        <div className="text-danger text-center">
+                          Set your friend code in the profile to send trade offers
+                        </div>
+                      )
                     )}
-
-                    <div className="text-muted small mt-2 lh-1">
-                      The player will receive a notification to accept or decline the trade offer.
-                      If the player accepts the trade offer, you will see each other's friend code and you can trade in the game.
-                      If the player set a public Telegram username, you can also chat with the player.
-                    </div>
                   </div>
                 </div>
               )
