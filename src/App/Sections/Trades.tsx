@@ -6,7 +6,10 @@ export const Trades: FC = () => {
 
   return (
     <Section header="Trades">
-      aaa
+
+      <div className="container-fluid py-3">
+        Test
+      </div>
     </Section>
   );
 };
