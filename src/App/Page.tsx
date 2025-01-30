@@ -1,13 +1,12 @@
-import { Tabbar } from '@telegram-apps/telegram-ui';
 import { useState, type FC } from 'react';
-import { backButton } from '@telegram-apps/sdk-react';
 
 import { Profile } from '@/App/Sections/Profile.tsx';
 import { Trades } from '@/App/Sections/Trades.tsx';
+import { MyTrades } from '@/App/Sections/MyTrades.tsx';
 
-export const IndexPage: FC = () => {
-  backButton.hide();
-  
+import './style.css';
+
+export const App: FC = () => {
   const Tabs = [
     {
       id: 'profile', text: 'Profile', Icon: () => (
@@ -19,6 +18,18 @@ export const IndexPage: FC = () => {
     {
       id: 'trades', text: 'Trades', Icon: () => (
         <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}>
+            <rect width={7} height={7} x={3} y={3} rx={1}></rect>
+            <rect width={7} height={7} x={3} y={14} rx={1}></rect>
+            <rect width={7} height={7} x={14} y={3} rx={1}></rect>
+            <rect width={7} height={7} x={14} y={14} rx={1}></rect>
+          </g>
+        </svg>
+      )
+    },
+    {
+      id: 'my-trades', text: 'My trades', Icon: () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24">
           <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m3.604 7.197l7.138-3.109a.96.96 0 0 1 1.27.527l4.924 11.902a1 1 0 0 1-.514 1.304L9.285 20.93a.96.96 0 0 1-1.271-.527L3.09 8.5a1 1 0 0 1 .514-1.304zM15 4h1a1 1 0 0 1 1 1v3.5M20 6q.396.168.768.315a1 1 0 0 1 .53 1.311L19 13"></path>
         </svg>
       )
@@ -27,21 +38,20 @@ export const IndexPage: FC = () => {
   const [currentTab, setCurrentTab] = useState(Tabs[0].id)
 
   return (
-    <>
-      {currentTab === 'profile' && (
-        <Profile />
-      )}
-      {currentTab === 'trades' && (
-        <Trades />
-      )}
-      <div style={{ padding: 50 }} />
-      <Tabbar>
+    <div className="d-flex flex-column w-100 vh-100">
+      <div className="flex-grow-1 position-relative overflow-auto">
+        {currentTab === 'profile' && <Profile />}
+        {currentTab === 'trades' && <Trades />}
+        {currentTab === 'my-trades' && <MyTrades />}
+      </div>
+      <div className="bottom-menu">
         {Tabs.map(({ id, text, Icon }) => (
-          <Tabbar.Item key={id} text={text} selected={id === currentTab} onClick={() => setCurrentTab(id)}>
-            <Icon />
-          </Tabbar.Item>
+          <div key={id} className={"item" + (id === currentTab ? " active" : "")} onClick={() => setCurrentTab(id)}>
+            <div className="icon"><Icon /></div>
+            <div>{text}</div>
+          </div>
         ))}
-      </Tabbar>
-    </>
+      </div>
+    </div>
   );
 };

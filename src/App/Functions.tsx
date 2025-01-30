@@ -14,9 +14,13 @@ export function ApiCall(Action: string, Values = {}, Callback: (data: any) => vo
   }).then(response => response.json())
     .then(data => {
       if (data.Result) {
-        Callback(data.Data);
+        Callback(data);
       } else {
-        Callback(false);
+        Callback({
+          Result: false,
+          Data: null,
+          Error: data.Error || 'An error occurred'
+        });
       }
     });
 }

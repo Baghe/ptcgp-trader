@@ -26,6 +26,7 @@ export function init(debug: boolean): void {
 
   // Mount all components used in the project.
   backButton.mount();
+  backButton.hide();
   miniApp.mount();
   themeParams.mount();
   initData.restore();
