@@ -1,12 +1,13 @@
-import { Section, Cell, Tabbar } from '@telegram-apps/telegram-ui';
+import { Tabbar } from '@telegram-apps/telegram-ui';
 import { useState, type FC } from 'react';
+import { backButton } from '@telegram-apps/sdk-react';
 
-import { Link } from '@/components/Link/Link.tsx';
-import { Page } from '@/components/Page.tsx';
-import { Profile } from '@/pages/IndexPage/Sections/Profile.tsx';
-import { Trades } from '@/pages/IndexPage/Sections/Trades.tsx';
+import { Profile } from '@/App/Sections/Profile.tsx';
+import { Trades } from '@/App/Sections/Trades.tsx';
 
 export const IndexPage: FC = () => {
+  backButton.hide();
+  
   const Tabs = [
     {
       id: 'profile', text: 'Profile', Icon: () => (
@@ -22,41 +23,17 @@ export const IndexPage: FC = () => {
         </svg>
       )
     },
-    {
-      id: 'debug', text: 'Debug', Icon: () => (
-        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24">
-          <g fill="currentColor">
-            <path d="M10 11a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1m1 3a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2z"></path>
-            <path fillRule="evenodd" d="M9.094 4.75A4 4 0 0 1 8 2h2a2 2 0 1 0 4 0h2a4 4 0 0 1-1.094 2.75A6.02 6.02 0 0 1 17.659 8H19a1 1 0 1 1 0 2h-1v2h1a1 1 0 1 1 0 2h-1v2h1a1 1 0 1 1 0 2h-1.341A6.003 6.003 0 0 1 6.34 18H5a1 1 0 1 1 0-2h1v-2H5a1 1 0 1 1 0-2h1v-2H5a1 1 0 1 1 0-2h1.341a6.02 6.02 0 0 1 2.753-3.25M8 16v-6a4 4 0 1 1 8 0v6a4 4 0 0 1-8 0" clipRule="evenodd"></path>
-          </g>
-        </svg>
-      )
-    },
   ];
   const [currentTab, setCurrentTab] = useState(Tabs[0].id)
 
   return (
-    <Page back={false}>
+    <>
       {currentTab === 'profile' && (
         <Profile />
       )}
       {currentTab === 'trades' && (
         <Trades />
       )}
-      {currentTab === 'debug' && (
-        <Section header="Application Launch Data">
-          <Link to="/init-data">
-            <Cell subtitle="User data, chat information, technical data">Init Data</Cell>
-          </Link>
-          <Link to="/launch-params">
-            <Cell subtitle="Platform identifier, Mini Apps version, etc.">Launch Parameters</Cell>
-          </Link>
-          <Link to="/theme-params">
-            <Cell subtitle="Telegram application palette information">Theme Parameters</Cell>
-          </Link>
-        </Section>
-      )}
-
       <div style={{ padding: 50 }} />
       <Tabbar>
         {Tabs.map(({ id, text, Icon }) => (
@@ -65,6 +42,6 @@ export const IndexPage: FC = () => {
           </Tabbar.Item>
         ))}
       </Tabbar>
-    </Page>
+    </>
   );
 };
