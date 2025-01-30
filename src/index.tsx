@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import { StrictMode } from 'react';
-import { useLaunchParams, miniApp, useSignal } from '@telegram-apps/sdk-react';
+import { miniApp, useSignal } from '@telegram-apps/sdk-react';
 import { retrieveLaunchParams } from '@telegram-apps/sdk-react';
 import { AppRoot } from '@telegram-apps/telegram-ui';
 
@@ -36,12 +36,12 @@ function ErrorBoundaryError({ error }: { error: unknown }) {
 }
 
 function App() {
-  const lp = useLaunchParams();
   const isDark = useSignal(miniApp.isDark);
+  // base
   return (
     <StrictMode>
       <ErrorBoundary fallback={ErrorBoundaryError}>
-        <AppRoot appearance={isDark ? 'dark' : 'light'} platform={['macos', 'ios'].includes(lp.platform) ? 'ios' : 'base'}>
+        <AppRoot appearance={isDark ? 'dark' : 'light'} platform={'base'}>
           <IndexPage />
         </AppRoot>
       </ErrorBoundary>
