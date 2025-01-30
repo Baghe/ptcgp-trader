@@ -18,8 +18,6 @@ export const Trades: FC = () => {
   const [IdTrade, setIdTrade] = useState<any>(null);
   const [TradeSelected, setTradeSelected] = useState<any>(null);
 
-  console.log(window.MiniApp)
-
   useEffect(() => {
     Load()
   }, []);
