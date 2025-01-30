@@ -43,10 +43,10 @@ export const Profile: FC = () => {
           setFormData({ ...FormData, nickname: value })
         }} />
       <Input
-        header={"Friend Code" + (FormData.friendCode.length === 16 ? '' : ' (required)')}
+        header={"Friend Code" + (FormData.friendCode?.length === 16 ? '' : ' (required)')}
         placeholder="0000-0000-0000-0000"
         maxLength={19} disabled={Saving}
-        status={FormData.friendCode.length === 16 ? 'default' : 'error'}
+        status={FormData.friendCode?.length === 16 ? 'default' : 'error'}
         value={FormData.friendCode.replace(/(\d{4})/g, '$1-').replace(/-$/, '')} onChange={(e) => {
           const value = e.target.value.replace(/\D/g, '');
           setFormData({ ...FormData, friendCode: value })
