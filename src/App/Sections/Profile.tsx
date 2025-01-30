@@ -18,8 +18,8 @@ export const Profile: FC = () => {
     ApiCall("profile-get", {}, (data) => {
       if (data) {
         setFormData({
-          nickname: data.nickname,
-          friendCode: data.friendCode
+          nickname: data.nickname || '',
+          friendCode: data.friendCode || ''
         });
         setPageLoaded(true);
       }
