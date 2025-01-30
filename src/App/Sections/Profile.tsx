@@ -1,7 +1,6 @@
-import { Section, Input, Button, Spinner, List, Card, Banner } from '@telegram-apps/telegram-ui';
-import React, { useEffect, useState, type FC } from 'react';
+import { Section, Input, Button, Spinner } from '@telegram-apps/telegram-ui';
+import { useEffect, useState, type FC } from 'react';
 import { ApiCall } from '../Functions';
-import { CardCell } from '@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardCell/CardCell';
 
 export const Profile: FC = () => {
   const [PageLoaded, setPageLoaded] = useState(false);
