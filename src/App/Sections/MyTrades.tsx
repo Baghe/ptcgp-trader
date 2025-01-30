@@ -105,7 +105,7 @@ export const MyTrades: FC = () => {
               const Trade = Trades[IdTrade] as any;
               return (
                 <div key={IdTrade} className="card">
-                  <div className="card-body py-2">
+                  <div className="card-body pt-2">
 
                     <div className="mb-1">
                       {Trade.Status === "open" && (

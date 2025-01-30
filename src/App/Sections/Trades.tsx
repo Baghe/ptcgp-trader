@@ -12,6 +12,7 @@ const Cards = CardsRaw as CardsType;
 export const Trades: FC = () => {
   const { initData } = retrieveLaunchParams();
   const [Trades, setTrades] = useState(null);
+  const [TradesPending, setTradesPending] = useState(null);
   const [TradesFiltered, setTradesFiltered] = useState<any>([]);
   const [Search, setSearch] = useState('');
   const [IdTrade, setIdTrade] = useState<any>(null);
@@ -37,6 +38,9 @@ export const Trades: FC = () => {
     ApiCall("trades-get", {}, (data) => {
       setTrades(data.Data);
     });
+    ApiCall("trades-pending", {}, (data) => {
+      setTradesPending(data.Data);
+    });
   }
 
   function BidSend(IdTrade: string, IdCard: string) {
@@ -51,9 +55,113 @@ export const Trades: FC = () => {
     });
   }
 
-  return initData && TradesFiltered ? (
+  function TradeComplete(IdTrade: string) {
+    ApiCall("trade-complete", { IdTrade: IdTrade }, (data) => {
+      if (data.Result) {
+        Load();
+      }
+    });
+  }
+
+  function TradeCancel(IdTrade: string) {
+    ApiCall("trade-cancel", { IdTrade: IdTrade }, (data) => {
+      if (data.Result) {
+        Load();
+      }
+    });
+  }
+
+  return initData && TradesFiltered && TradesPending ? (
     <>
       <div className="container py-3">
+
+        {Object.values(TradesPending).length > 0 && (
+          <>
+            <div className="text-primary h5">Accepted trades ({Object.values(TradesPending).length})</div>
+            <div className="d-flex flex-column gap-2 mb-4">
+              {Object.keys(TradesPending).map((IdTrade: string) => {
+                const Trade = TradesPending[IdTrade] as any;
+                return (
+                  <div key={IdTrade} className="card">
+                    <div className="card-body">
+
+                      <div className="text-primary h6 mb-1">Trader</div>
+                      <div className="rounded-2 overflow-hidden p-2 mb-2" style={{ backgroundColor: "#17212b" }}>
+                        {Trade.Trader.FriendName && (
+                          <div className="mb-2">
+                            <div className="small text-muted">Player</div>
+                            {Trade.Trader.Username ? (
+                              <a href={"https://t.me/" + Trade.Trader.Username} target="_blank" className="h5 mb-0">{Trade.Trader.FriendName}</a>
+                            ) : (
+                              <div className="h5 mb-0">{Trade.Trader.FriendName}</div>
+                            )}
+                          </div>
+                        )}
+
+                        <div>
+                          <div className="small text-muted">Friend Code</div>
+                          <div className="input-group">
+                            <input type="text" className="form-control bg-light bg-opacity-25 fw-bold border-0"
+                              defaultValue={Trade.Trader.FriendCode.replace(/(\d{4})/g, '$1-').replace(/-$/, '')} />
+                            <button className="btn btn-primary" onClick={() => {
+                              navigator.clipboard.writeText(Trade.Trader.FriendCode);
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24">
+                                <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}>
+                                  <path d="M19.4 20H9.6a.6.6 0 0 1-.6-.6V9.6a.6.6 0 0 1 .6-.6h9.8a.6.6 0 0 1 .6.6v9.8a.6.6 0 0 1-.6.6"></path>
+                                  <path d="M15 9V4.6a.6.6 0 0 0-.6-.6H4.6a.6.6 0 0 0-.6.6v9.8a.6.6 0 0 0 .6.6H9"></path>
+                                </g>
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="text-danger h6 mb-1">Send</div>
+                      <div className="d-flex rounded-2 overflow-hidden p-2 mb-2" style={{ backgroundColor: "#17212b" }}>
+                        <img src={"https://static.dotgg.gg/pokepocket/card/" + Trade.IdCard + ".webp"} alt="" style={{ height: 96 }} />
+                        <div className="flex-grow-1 ms-2">
+                          <div className="badge bg-primary">{Cards[Trade.IdCard][1]}</div>
+                          <div className="fw-bold text-truncate">{Cards[Trade.IdCard][0]}</div>
+                        </div>
+                      </div>
+
+                      <div className="text-success h6 mb-1">Receive</div>
+                      <div className="d-flex rounded-2 overflow-hidden p-2 mb-2" style={{ backgroundColor: "#17212b" }}>
+                        <img src={"https://static.dotgg.gg/pokepocket/card/" + Trade.IdCardTraded + ".webp"} alt="" style={{ height: 96 }} />
+                        <div className="flex-grow-1 ms-2">
+                          <div className="badge bg-primary">{Cards[Trade.IdCardTraded][1]}</div>
+                          <div className="fw-bold text-truncate">{Cards[Trade.IdCardTraded][0]}</div>
+                        </div>
+                      </div>
+
+                      <div className="d-flex gap-2">
+                        <div className="w-50">
+                          <button className="btn btn-sm btn-danger fw-bold w-100" onClick={() => TradeCancel(IdTrade)}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" className='d-inline'>
+                              <path fill="currentColor" d="M9.075 21q-.4 0-.762-.15t-.638-.425l-4.1-4.1q-.275-.275-.425-.638T3 14.926v-5.85q0-.4.15-.762t.425-.638l4.1-4.1q.275-.275.638-.425T9.075 3h5.85q.4 0 .763.15t.637.425l4.1 4.1q.275.275.425.638t.15.762v5.85q0 .4-.15.763t-.425.637l-4.1 4.1q-.275.275-.638.425t-.762.15zM12 13.4l2.15 2.15q.275.275.7.275t.7-.275t.275-.7t-.275-.7L13.4 12l2.15-2.15q.275-.275.275-.7t-.275-.7t-.7-.275t-.7.275L12 10.6L9.85 8.45q-.275-.275-.7-.275t-.7.275t-.275.7t.275.7L10.6 12l-2.15 2.15q-.275.275-.275.7t.275.7t.7.275t.7-.275z"></path>
+                            </svg>
+                            <span className='d-none d-sm-inline ms-2'>Cancelled</span>
+                          </button>
+                        </div>
+                        <div className="w-50">
+                          <button className="btn btn-sm btn-success fw-bold w-100" onClick={() => TradeComplete(IdTrade)}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width={22} height={22} viewBox="0 0 24 24" className='d-inline'>
+                              <path fill="currentColor" d="M12 9L8.5 5.5L12 2l3.5 3.5zM1 20v-4q0-.85.588-1.425T3 14h3.275q.5 0 .95.25t.725.675q.725.975 1.788 1.525T12 17q1.225 0 2.288-.55t1.762-1.525q.325-.425.763-.675t.912-.25H21q.85 0 1.425.575T23 16v4h-7v-2.275q-.875.625-1.888.95T12 19q-1.075 0-2.1-.337T8 17.7V20zm3-7q-1.25 0-2.125-.875T1 10q0-1.275.875-2.137T4 7q1.275 0 2.138.863T7 10q0 1.25-.862 2.125T4 13m16 0q-1.25 0-2.125-.875T17 10q0-1.275.875-2.137T20 7q1.275 0 2.138.863T23 10q0 1.25-.862 2.125T20 13"></path>
+                            </svg>
+                            <span className='d-none d-sm-inline ms-2'>Completed</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </>
+
+        )}
+
         <div className="text-primary h5">Trades</div>
 
         <div className="card mb-3">
