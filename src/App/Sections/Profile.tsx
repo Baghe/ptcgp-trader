@@ -41,7 +41,7 @@ export const Profile: FC = () => {
     <div className="container py-3">
       <div className="text-primary h5">Profile</div>
       <div className="card">
-        <div className="card-body">
+        <div className="card-body pt-2">
           <div className="mb-2">
             <div className="text-muted small ps-2">Nickname</div>
             <input type="text" className="form-control form-control-lg" placeholder="Ash"

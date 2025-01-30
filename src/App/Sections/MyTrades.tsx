@@ -401,7 +401,9 @@ export const MyTrades: FC = () => {
                             if (CardSelected.includes(IdCard)) {
                               setCardSelected(CardSelected.filter((CardId: string) => CardId !== IdCard));
                             } else {
-                              setCardSelected([...CardSelected, IdCard]);
+                              if (CardSelected.length < 8) {
+                                setCardSelected([...CardSelected, IdCard]);
+                              }
                             }
                           }
                         }}>
@@ -442,6 +444,11 @@ export const MyTrades: FC = () => {
                     Close
                   </div>
                 </button>
+                {CardSelect === "Offers" && CardSelected.length === 8 && (
+                  <div className="text-danger small text-center">
+                    Maximum of 8 cards selected
+                  </div>
+                )}
                 {CardSelect === "Offers" && (
                   <button className='btn btn-primary d-flex align-items-center' onClick={() => {
                     setFormData({ ...FormData, Offers: CardSelected });

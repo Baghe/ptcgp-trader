@@ -12,6 +12,7 @@ body {
   background: #1e2a35;
   display: flex;
   justify-content: space-around;
+  padding-bottom: 1rem;
 }
 
 .bottom-menu .item {
