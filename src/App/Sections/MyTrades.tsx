@@ -125,7 +125,7 @@ export const MyTrades: FC = () => {
                     </div>
 
                     <div className="d-flex rounded-2 overflow-hidden p-2" style={{ backgroundColor: "#17212b" }}>
-                      <img src={"https://static.dotgg.gg/pokepocket/card/" + Trade.IdCard + ".webp"} alt="" style={{ height: 96 }} />
+                      <img src={"https://baghe.altervista.org/bot/ptcgptrader/v1/data/cards/" + Trade.IdCard + ".webp"} alt="" style={{ height: 96 }} />
                       <div className="flex-grow-1 ms-2">
                         <div className="badge bg-primary">{Cards[Trade.IdCard][1]}</div>
                         <div className="fw-bold text-truncate">{Cards[Trade.IdCard][0]}</div>
@@ -139,7 +139,7 @@ export const MyTrades: FC = () => {
                           </div>
                           {Trade.Offers.slice(0, 3).map((IdCard: string) => {
                             return (
-                              <img src={"https://static.dotgg.gg/pokepocket/card/" + IdCard + ".webp"} alt="" key={IdCard} style={{ height: 48 }} />
+                              <img src={"https://baghe.altervista.org/bot/ptcgptrader/v1/data/cards/" + IdCard + ".webp"} alt="" key={IdCard} style={{ height: 48 }} />
                             )
                           })}
                           {Trade.Offers.length > 3 && (
@@ -168,7 +168,7 @@ export const MyTrades: FC = () => {
                                   <div className="card-body p-2">
 
                                     <div className="d-flex align-items-center">
-                                      <img src={"https://static.dotgg.gg/pokepocket/card/" + Bid.IdCard + ".webp"} alt="" style={{ height: 31 }} className="me-2" />
+                                      <img src={"https://baghe.altervista.org/bot/ptcgptrader/v1/data/cards/" + Bid.IdCard + ".webp"} alt="" style={{ height: 31 }} className="me-2" />
                                       <div className="flex-grow-1 lh-1">
                                         <div className="fw-bold">{Cards[Bid.IdCard][0]}</div>
                                         <div className="small opacity-25">{new Date(Bid.DateBid).toLocaleString()}</div>
@@ -267,7 +267,7 @@ export const MyTrades: FC = () => {
               <div className="d-flex rounded-2 overflow-hidden p-2" style={{ backgroundColor: "#17212b" }}>
                 {FormData.IdCard ? (
                   <>
-                    <img src={"https://static.dotgg.gg/pokepocket/card/" + FormData.IdCard + ".webp"} alt="" style={{ height: 88 }} className="me-2" />
+                    <img src={"https://baghe.altervista.org/bot/ptcgptrader/v1/data/cards/" + FormData.IdCard + ".webp"} alt="" style={{ height: 88 }} className="me-2" />
                     <div className="flex-grow-1">
                       <div className="badge bg-primary">{Cards[FormData.IdCard][1]}</div>
                       <div className="fw-bold text-truncate">{Cards[FormData.IdCard][0]}</div>
@@ -303,7 +303,7 @@ export const MyTrades: FC = () => {
                   <>
                     <div className="flex-grow-1 d-flex flex-wrap gap-2">
                       {FormData.Offers.map((IdCard: string) => (
-                        <img src={"https://static.dotgg.gg/pokepocket/card/" + IdCard + ".webp"} alt="" style={{ height: 88 }} key={IdCard} />
+                        <img src={"https://baghe.altervista.org/bot/ptcgptrader/v1/data/cards/" + IdCard + ".webp"} alt="" style={{ height: 88 }} key={IdCard} />
                       ))}
                     </div>
                     <div className="ms-2">
@@ -365,7 +365,7 @@ export const MyTrades: FC = () => {
                         {CardSelected.map((IdCard: string) => {
                           return (
                             <div key={IdCard} className="card overflow-hidden rounded-2 position-relative">
-                              <img src={"https://static.dotgg.gg/pokepocket/card/" + IdCard + ".webp"} alt="" style={{ height: 96 }} />
+                              <img src={"https://baghe.altervista.org/bot/ptcgptrader/v1/data/cards/" + IdCard + ".webp"} alt="" style={{ height: 96 }} />
                               <button className="bg-danger text-white rounded-circle position-absolute top-0 end-0 p-0 text-center"
                                 style={{ width: 24, height: 24 }}
                                 onClick={() => setCardSelected(CardSelected.filter((CardId: string) => CardId !== IdCard))}>
@@ -407,7 +407,7 @@ export const MyTrades: FC = () => {
                             }
                           }
                         }}>
-                          <img src={"https://static.dotgg.gg/pokepocket/card/" + IdCard + ".webp"} alt=""
+                          <img src={"https://baghe.altervista.org/bot/ptcgptrader/v1/data/cards/" + IdCard + ".webp"} alt=""
                             className={CardSelected.includes(IdCard) ? "opacity-25" : ""} />
                           {CardSelected.includes(IdCard) && (
                             <div className="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center z-2">

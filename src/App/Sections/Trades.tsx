@@ -119,7 +119,7 @@ export const Trades: FC = () => {
 
                       <div className="text-danger h6 mb-1">Send</div>
                       <div className="d-flex rounded-2 overflow-hidden p-2 mb-2" style={{ backgroundColor: "#17212b" }}>
-                        <img src={"https://static.dotgg.gg/pokepocket/card/" + Trade.IdCard + ".webp"} alt="" style={{ height: 96 }} />
+                        <img src={"https://baghe.altervista.org/bot/ptcgptrader/v1/data/cards/" + Trade.IdCard + ".webp"} alt="" style={{ height: 96 }} />
                         <div className="flex-grow-1 ms-2">
                           <div className="badge bg-primary">{Cards[Trade.IdCard][1]}</div>
                           <div className="fw-bold text-truncate">{Cards[Trade.IdCard][0]}</div>
@@ -128,7 +128,7 @@ export const Trades: FC = () => {
 
                       <div className="text-success h6 mb-1">Receive</div>
                       <div className="d-flex rounded-2 overflow-hidden p-2 mb-2" style={{ backgroundColor: "#17212b" }}>
-                        <img src={"https://static.dotgg.gg/pokepocket/card/" + Trade.IdCardTraded + ".webp"} alt="" style={{ height: 96 }} />
+                        <img src={"https://baghe.altervista.org/bot/ptcgptrader/v1/data/cards/" + Trade.IdCardTraded + ".webp"} alt="" style={{ height: 96 }} />
                         <div className="flex-grow-1 ms-2">
                           <div className="badge bg-primary">{Cards[Trade.IdCardTraded][1]}</div>
                           <div className="fw-bold text-truncate">{Cards[Trade.IdCardTraded][0]}</div>
@@ -205,7 +205,7 @@ export const Trades: FC = () => {
                         <div className="d-flex flex-wrap gap-1">
                           {OffersFiltered.length === 1 ? (
                             <div className="d-flex">
-                              <img src={"https://static.dotgg.gg/pokepocket/card/" + OffersFiltered[0] + ".webp"} alt="" style={{ height: 96 }}
+                              <img src={"https://baghe.altervista.org/bot/ptcgptrader/v1/data/cards/" + OffersFiltered[0] + ".webp"} alt="" style={{ height: 96 }}
                                 className="me-2" />
                               <div className="flex-grow-1">
                                 <div className="badge bg-primary">{Cards[OffersFiltered[0]][1]}</div>
@@ -217,7 +217,7 @@ export const Trades: FC = () => {
                             OffersFiltered.map((IdCard: string) => {
                               const Height = OffersFiltered.length > 1 ? (OffersFiltered.length > 3 ? 46 : 64) : 96;
                               return (
-                                <img src={"https://static.dotgg.gg/pokepocket/card/" + IdCard + ".webp"} alt="" key={IdCard} style={{ height: Height }} />
+                                <img src={"https://baghe.altervista.org/bot/ptcgptrader/v1/data/cards/" + IdCard + ".webp"} alt="" key={IdCard} style={{ height: Height }} />
                               )
                             })
                           )}
@@ -228,7 +228,7 @@ export const Trades: FC = () => {
                   <div className="w-50">
                     <div className="card h-100 rounded-start-0" style={{ backgroundColor: '#3f2f3d' }}>
                       <div className="card-body p-2 d-flex">
-                        <img src={"https://static.dotgg.gg/pokepocket/card/" + Trade.IdCard + ".webp"} alt="" style={{ height: 96 }}
+                        <img src={"https://baghe.altervista.org/bot/ptcgptrader/v1/data/cards/" + Trade.IdCard + ".webp"} alt="" style={{ height: 96 }}
                           className="img-fluid d-block" />
                         <div className="flex-grow-1 ms-2">
                           <div className="badge bg-primary">{Cards[Trade.IdCard][1]}</div>
@@ -272,7 +272,7 @@ export const Trades: FC = () => {
                       <div className="card-body p-2">
                         {OffersFiltered.length === 1 ? (
                           <div className="d-flex overflow-hidden">
-                            <img src={"https://static.dotgg.gg/pokepocket/card/" + OffersFiltered[0] + ".webp"} alt="" style={{ height: 96 }} />
+                            <img src={"https://baghe.altervista.org/bot/ptcgptrader/v1/data/cards/" + OffersFiltered[0] + ".webp"} alt="" style={{ height: 96 }} />
                             <div className="flex-grow-1 ms-2">
                               <div className="badge bg-primary">{Cards[OffersFiltered[0]][1]}</div>
                               <div className="fw-bold text-truncate">{Cards[OffersFiltered[0]][0]}</div>
@@ -291,7 +291,7 @@ export const Trades: FC = () => {
                                       setTradeSelected(IdCard);
                                     }
                                   }}>
-                                    <img src={"https://static.dotgg.gg/pokepocket/card/" + IdCard + ".webp"} alt=""
+                                    <img src={"https://baghe.altervista.org/bot/ptcgptrader/v1/data/cards/" + IdCard + ".webp"} alt=""
                                       className={TradeSelected === IdCard ? "opacity-25" : ""} />
                                     {TradeSelected === IdCard && (
                                       <div className="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center z-2">
@@ -328,7 +328,7 @@ export const Trades: FC = () => {
                     <div className="card mb-3">
                       <div className="card-body p-2">
                         <div className="d-flex overflow-hidden">
-                          <img src={"https://static.dotgg.gg/pokepocket/card/" + Trade.IdCard + ".webp"} alt="" style={{ height: 96 }} />
+                          <img src={"https://baghe.altervista.org/bot/ptcgptrader/v1/data/cards/" + Trade.IdCard + ".webp"} alt="" style={{ height: 96 }} />
                           <div className="flex-grow-1 ms-2">
                             <div className="badge bg-primary">{Cards[Trade.IdCard][1]}</div>
                             <div className="fw-bold text-truncate">{Cards[Trade.IdCard][0]}</div>
