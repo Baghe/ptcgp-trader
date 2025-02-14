@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react-swc'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/ptcgp-trader-2/',
+  base: '/ptcgp-trader/',
   resolve: {
     alias: {
       src: "/src",
