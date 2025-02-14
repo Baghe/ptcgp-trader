@@ -70,7 +70,7 @@ body {
 }
 
 .btn {
-  --bs-btn-border-radius: .75rem;
+  --bs-btn-border-radius: .5rem;
   --bs-btn-padding-x: 1.5rem;
   font-weight: 500;
 }

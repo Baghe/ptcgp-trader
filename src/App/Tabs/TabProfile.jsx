@@ -79,7 +79,7 @@ export default function Tab({ App }) {
               </div>
             </div>
           </div>
-          <button className="btn btn-primary btn-sm rounded-3" onClick={() => ProfileSave(UserProfile)}>{t("Salva profilo")}</button>
+          <button className="btn btn-primary" onClick={() => ProfileSave(UserProfile)}>{t("Salva profilo")}</button>
         </div>
       </div>
 
@@ -99,7 +99,7 @@ export default function Tab({ App }) {
               </svg>
               <div className="fw-bold">{t("Non cerchi nessuna carta")}</div>
               <div className="small text-muted">{t("Seleziona almeno una carta per vedere gli scambi disponibili con gli altri giocatori")}</div>
-              <button className="btn btn-primary btn-sm rounded-3 mt-3" onClick={() => setPanelShow("CardsIn")}>
+              <button className="btn btn-primary mt-3" onClick={() => setPanelShow("CardsIn")}>
                 {t("Seleziona le carte che cerchi")}
               </button>
             </div>
@@ -113,7 +113,7 @@ export default function Tab({ App }) {
                   </div>
                 ))}
               </div>
-              <button className="btn btn-primary btn-sm rounded-3 mt-2" onClick={() => setPanelShow("CardsIn")}>
+              <button className="btn btn-primary mt-2" onClick={() => setPanelShow("CardsIn")}>
                 {t("Modifica carte")}
               </button>
             </>
@@ -137,7 +137,7 @@ export default function Tab({ App }) {
               </svg>
               <div className="fw-bold">{t("Non offri nessuna carta")}</div>
               <div className="small text-muted">{t("Seleziona almeno una carta che sei disposto a scambiare")}</div>
-              <button className="btn btn-primary btn-sm rounded-3 mt-3" onClick={() => setPanelShow("CardsOut")}>
+              <button className="btn btn-primary mt-3" onClick={() => setPanelShow("CardsOut")}>
                 {t("Seleziona le carte che offri")}
               </button>
             </div>
@@ -154,7 +154,7 @@ export default function Tab({ App }) {
                   </div>
                 ))}
               </div>
-              <button className="btn btn-primary btn-sm rounded-3 mt-2" onClick={() => setPanelShow("CardsOut")}>
+              <button className="btn btn-primary mt-2" onClick={() => setPanelShow("CardsOut")}>
                 {t("Modifica carte")}
               </button>
             </>
@@ -319,8 +319,8 @@ function CardSelect({ App, PanelShow, Close, Preselect }) {
             </div>
           </div>
           <div className="pt-2 d-flex justify-content-between">
-            <button className="btn btn-secondary btn-sm rounded-3" onClick={() => ThisClose()}>{t("Annulla")}</button>
-            <button className="btn btn-primary btn-sm rounded-3" onClick={() => ThisClose(CardsSelected)}>{t("Conferma")}</button>
+            <button className="btn btn-secondary" onClick={() => ThisClose()}>{t("Annulla")}</button>
+            <button className="btn btn-primary" onClick={() => ThisClose(CardsSelected)}>{t("Conferma")}</button>
           </div>
         </div>
 

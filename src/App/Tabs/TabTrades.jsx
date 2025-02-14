@@ -181,7 +181,7 @@ function CardSelect({ App, IdCard, Close }) {
             </div>
           </div>
           <div className="pt-2 d-flex justify-content-between">
-            <button className="btn btn-secondary btn-sm rounded-3" onClick={() => {
+            <button className="btn btn-secondary" onClick={() => {
               if (TradeOpen.Visible) {
                 setTradeOpen({ ...TradeOpen, Visible: false })
               } else {
@@ -189,8 +189,7 @@ function CardSelect({ App, IdCard, Close }) {
               }
             }}>{t(TradeOpen.Visible ? "Indietro" : "Annulla")}</button>
 
-
-            <button className="btn btn-primary btn-sm rounded-3 transition"
+            <button className="btn btn-primary transition"
               style={{ opacity: TradeOpen.Visible ? 1 : 0 }}
               disabled={!TradeOpen.Visible}
               onClick={() => {
