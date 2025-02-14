@@ -1,8 +1,8 @@
-import { retrieveLaunchParams } from "@telegram-apps/sdk-react";
+import { retrieveLaunchParams } from "@telegram-apps/bridge"
 
-export function ApiCall(Action: string, Values = {}, Callback: (data: any) => void) {
-  const { initDataRaw } = retrieveLaunchParams();
-  fetch('https://baghe.altervista.org/bot/ptcgptrader/v1/', {
+export function ApiCall(Action, Values, Callback) {
+  const { initDataRaw } = retrieveLaunchParams()
+  fetch('https://baghe.altervista.org/bot/ptcgptrader/v2/', {
     method: 'POST',
     headers: {
       Authorization: `tma ${initDataRaw}`
@@ -14,13 +14,13 @@ export function ApiCall(Action: string, Values = {}, Callback: (data: any) => vo
   }).then(response => response.json())
     .then(data => {
       if (data.Result) {
-        Callback(data);
+        Callback(data)
       } else {
         Callback({
           Result: false,
           Data: null,
           Error: data.Error || 'An error occurred'
-        });
+        })
       }
-    });
+    })
 }
