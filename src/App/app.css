@@ -19,8 +19,6 @@ body {
 
 .menu {
   background: #1e2a35;
-  display: flex;
-  justify-content: space-around;
 }
 
 .menu .item {
@@ -29,6 +27,7 @@ body {
   text-align: center;
   font-size: small;
   cursor: pointer;
+  position: relative;
 }
 
 .menu .item .icon {
@@ -97,16 +96,18 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 0;
+  opacity: .75;
+  max-height: 0;
   margin: 0 auto;
   background-color: #232e3c;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-  transition: all 0.2s;
+  transition: all .5s;
 }
 
 .panel-bottom.active .panel-content {
-  height: calc(100vh - 120px);
+  max-height: calc(100vh - 120px);
+  opacity: 1;
 }
 
 .transition {

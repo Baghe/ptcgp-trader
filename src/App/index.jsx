@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { ApiCall } from "./Functions/ApiCall"
 import t from "./Functions/LibLang"
 import TabTrades from "./Tabs/TabTrades"
+import TabOffers from "./Tabs/TabOffers"
 import TabProfile from "./Tabs/TabProfile"
 import "./app.css"
 
@@ -11,12 +12,21 @@ export default function App() {
 
   const Tabs = {
     Trades: {
-      Label: t("Scambi"),
+      Label: t("Scambi disponibili"),
       Icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24">
           <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m3.604 7.197l7.138-3.109a.96.96 0 0 1 1.27.527l4.924 11.902a1 1 0 0 1-.514 1.304L9.285 20.93a.96.96 0 0 1-1.271-.527L3.09 8.5a1 1 0 0 1 .514-1.304zM15 4h1a1 1 0 0 1 1 1v3.5M20 6q.396.168.768.315a1 1 0 0 1 .53 1.311L19 13"></path>
         </svg>
       )
+    },
+    Offers: {
+      Label: t("Offerte"),
+      Icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24">
+          <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 17h12M4 17l3.5-3.5M4 17l3.5 3.5M7 7h13m0 0l-3.5-3.5M20 7l-3.5 3.5"></path>
+        </svg>
+      ),
+      Alert: App ? Object.values(App.Offers).filter((Offer) => Offer.IdStatus === "accepted").length : 0
     },
     Profile: {
       Label: t("Profilo"),
@@ -49,12 +59,21 @@ export default function App() {
   return (
     <div className="d-flex flex-column" style={{ height: "100vh" }}>
       <div className="menu">
-        {Object.keys(Tabs).map((IdTab) => (
-          <div key={IdTab} className={"item" + (IdTab === Tab ? " active" : "")} onClick={() => setTab(IdTab)}>
-            <div className="icon">{Tabs[IdTab].Icon}</div>
-            <div>{Tabs[IdTab].Label}</div>
-          </div>
-        ))}
+        <div className="container d-flex">
+          {Object.keys(Tabs).map((IdTab) => (
+            <div key={IdTab} className={"item" + (IdTab === Tab ? " active" : "")} onClick={() => setTab(IdTab)} style={{ width: 100 / Object.keys(Tabs).length + "%" }}>
+              <div className="icon">{Tabs[IdTab].Icon}</div>
+              <div className="lh-1 mt-1 position-relative">
+                {Tabs[IdTab].Label}
+                {Tabs[IdTab].Alert > 0 && (
+                  <span className="badge rounded-pill bg-danger ms-1">
+                    {Tabs[IdTab].Alert}
+                  </span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
       <div className="flex-grow-1 overflow-auto">
         {App === null ? (
@@ -77,6 +96,7 @@ export default function App() {
         ) : (
           <div className="container py-3">
             {Tab === "Trades" && <TabTrades App={App} />}
+            {Tab === "Offers" && <TabOffers App={App} />}
             {Tab === "Profile" && <TabProfile App={App} />}
           </div>
         )}

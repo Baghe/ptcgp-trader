@@ -271,7 +271,7 @@ function CardSelect({ App, PanelShow, Close, Preselect }) {
 
   return (
     <div className={"panel-bottom" + (Visible ? " active" : "")} onClick={() => ThisClose(null)}>
-      <div className="panel-content container p-3" onClick={(e) => e.stopPropagation()}>
+      <div className="panel-content container h-100 p-3" onClick={(e) => e.stopPropagation()}>
 
         <div className="d-flex flex-column h-100">
           {PanelShow === "CardsIn" && (
